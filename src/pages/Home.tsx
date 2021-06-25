@@ -31,17 +31,6 @@ export const Home = () => {
       return;
     }
 
-    // const toastId = toast.loading("Waitng...");
-    // const roomRef = await database.ref(`rooms/${roomCode}`).get();
-    // toast.dismiss(toastId);
-
-    // if (!roomRef.exists()) {
-    //   toast.error("Room does not exists.");
-    //   return;
-    // }
-
-    // history.push(`/rooms/${roomCode}`);
-
     const joinRoom = new Promise((resolve, reject) => {
       database
         .ref(`rooms/${roomCode}`)
@@ -49,6 +38,9 @@ export const Home = () => {
         .then((roomRef) => {
           if (!roomRef.exists()) {
             reject("Room does not exists.");
+          }
+          if (roomRef.val().endedAt) {
+            reject("Room already closed.");
           }
           resolve("");
           return roomRef;

@@ -14,3 +14,101 @@ body {
 body, input, button, textarea {
     font: 400 16px 'Roboto', sans-serif;
 }
+
+.Overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(#050206, 0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal {
+    padding: 64px 0;
+
+    width: 100%;
+    max-width: 590px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    svg {
+        margin-bottom: 24px;
+
+        width: 48px;
+        height: 48px;
+
+        path {
+            stroke: #E73F5D;
+            stroke-width: 2;
+        }
+    }
+
+    h2 {
+        margin-bottom: 18px;
+
+        font-family: 'Poppins', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    span {
+        margin-bottom: 40px;
+
+        font-size: 16px;
+        line-height: 26px;
+
+        color:  #737380;
+    }
+
+    button {
+        padding: 0 32px;
+
+        height: 48px;
+
+        font-weight: 500;
+
+        border: 0;
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        transition: filter 0.2s ease;
+
+        &:hover {
+            filter: brightness(0.9);
+        }
+
+        &.cancel {
+            color: #737380;
+
+            background: #DBDCDD;
+        }
+
+        &.confirm {
+            color: #fff;
+
+            background: #E73F5D;
+        }
+    }
+
+    div {
+        display: flex;
+        gap: 8px;
+    }
+}
