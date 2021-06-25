@@ -103,16 +103,24 @@ export const Room = () => {
 
         <div className="question-list">
           {questions.map((question) => (
-            <Question key={question.id} content={question.content} author={question.author}>
-              <button
-                className={`like-button ${question.likeId ? "liked" : ""}`}
-                type="button"
-                aria-label="Marcar como gostei"
-                onClick={handleLikeQuestion(question.id, question.likeId)}
-              >
-                {question.likeCount > 0 && <span>{question.likeCount}</span>}
-                <LikeSvg />
-              </button>
+            <Question
+              key={question.id}
+              content={question.content}
+              author={question.author}
+              isAnswered={question.isAnswered}
+              isHighlighted={question.isHighlighted}
+            >
+              {!question.isAnswered && (
+                <button
+                  className={`like-button ${question.likeId ? "liked" : ""}`}
+                  type="button"
+                  aria-label="Marcar como gostei"
+                  onClick={handleLikeQuestion(question.id, question.likeId)}
+                >
+                  {question.likeCount > 0 && <span>{question.likeCount}</span>}
+                  <LikeSvg />
+                </button>
+              )}
             </Question>
           ))}
         </div>

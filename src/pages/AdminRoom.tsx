@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import Modal from "react-modal";
 
-import { DeleteSvg, LogoImg, EndRoomSvg } from "../assets/images";
+import { DeleteSvg, LogoImg, EndRoomSvg, CheckImg, AnswerImg } from "../assets/images";
 import { Button, RoomCode, Question } from "../components";
 import { useRoom } from "../hooks";
 import { database } from "../services";
@@ -35,6 +35,18 @@ export const AdminRoom = () => {
     await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
 
     closeQuestionModal();
+  };
+
+  const handleCheckQuestionAsAnswered = (questionId: string) => async () => {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isAnswered: true,
+    });
+  };
+
+  const handleHighlightQuestion = (questionId: string) => async () => {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isHighlighted: true,
+    });
   };
 
   const openQuestionModal = (questionId: string) => () => setQuestionIdModalIdOpen(questionId);
@@ -87,7 +99,22 @@ export const AdminRoom = () => {
         <div className="question-list">
           {questions.map((question) => (
             <Fragment key={question.id}>
-              <Question content={question.content} author={question.author}>
+              <Question
+                content={question.content}
+                author={question.author}
+                isAnswered={question.isAnswered}
+                isHighlighted={question.isHighlighted}
+              >
+                {!question.isAnswered && (
+                  <>
+                    <button type="button" onClick={handleCheckQuestionAsAnswered(question.id)}>
+                      <img src={CheckImg} alt="Marcar pergunta como respondida" />
+                    </button>
+                    <button type="button" onClick={handleHighlightQuestion(question.id)}>
+                      <img src={AnswerImg} alt="Dar destaque à pergunta" />
+                    </button>
+                  </>
+                )}
                 <button type="button" onClick={openQuestionModal(question.id)} className="delete">
                   <DeleteSvg />
                 </button>

@@ -11,6 +11,19 @@
         margin-top: 8px;
     }
 
+    &.highlighted {
+        background: #f4f0ff;
+        border: 1px solid #8350fd;
+
+        footer .user-info span {
+            color: #29292e;
+        }
+    }
+
+    &.answered {
+        background: #dbdcdd;
+    }
+
     p {
         color: #29292e;
     }
@@ -42,12 +55,17 @@
             }
         }
 
+        > div {
+            display: flex;
+            gap: 16px;
+        }
+
         button {
             background: transparent;
 
             border: 0;
 
-            transition: filter 0.2s ease;
+            transition: all 0.2s ease;
 
             cursor: pointer;
 
@@ -67,13 +85,15 @@
                 }
             }
 
-            &:not(.delete):hover {
+            &:hover {
                 filter: brightness(0.7);
-            }
 
-            &.delete:hover {
-                svg path {
-                    stroke: #E73F5D;
+                &.delete {
+                    filter: brightness(1);;
+
+                    svg path {
+                        stroke: #E73F5D;
+                    }
                 }
             }
         }
